@@ -1,6 +1,5 @@
 package com.example.semplenotesapp.notelistscreen
 
-import android.content.Context.MODE_PRIVATE
 import android.os.Bundle
 import android.text.Editable
 import android.text.TextWatcher
@@ -8,8 +7,8 @@ import android.util.Log
 import android.view.*
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
+import androidx.constraintlayout.widget.ConstraintLayout
 import androidx.databinding.DataBindingUtil
-import androidx.databinding.adapters.AbsListViewBindingAdapter
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProvider
 import androidx.navigation.fragment.findNavController
@@ -22,7 +21,9 @@ import com.example.semplenotesapp.data.Note
 import com.example.semplenotesapp.data.NoteRepository
 import com.example.semplenotesapp.data.NotesDatabase
 import com.example.semplenotesapp.databinding.FragmentNoteListBinding
+import com.google.android.material.snackbar.Snackbar
 import java.util.*
+import kotlin.properties.Delegates
 
 
 class NoteListFragment : Fragment() {
@@ -33,6 +34,7 @@ class NoteListFragment : Fragment() {
     private lateinit var adapter: NoteListAdapter
     private  lateinit var noteList : ArrayList<Note>
     private lateinit var searchText : String
+    private var count by Delegates.notNull<Int>()
 
 
     private var mActionMode: ActionMode? = null
@@ -124,7 +126,8 @@ class NoteListFragment : Fragment() {
 
        fun toggleSelection(position : Int , note: Note){
            adapter.toggleSelection(position , note)
-           val count = adapter.getSelectedItemsCount()
+//           val count = adapter.getSelectedItemsCount()
+           count = adapter.getSelectedItemsCount()
            if (count >= 0){
                mActionMode?.title = "$count item selected"
                mActionMode?.invalidate();
@@ -134,7 +137,7 @@ class NoteListFragment : Fragment() {
     private val myActModeCallback = object : ActionMode.Callback {
 
         override fun onCreateActionMode(mode: ActionMode, menu: Menu?): Boolean {
-            mode.menuInflater.inflate(R.menu.example_menu, menu)
+            mode.menuInflater.inflate(R.menu.contextual_action_bar_menu, menu)
 //            mode.title = "Choose your option"
             return true
         }
@@ -151,14 +154,14 @@ class NoteListFragment : Fragment() {
                         noteListViewModel.deleteNote(note)
                     }
                     adapter.notifyDataSetChanged()
-                    Toast.makeText(context, "Deleted", Toast.LENGTH_SHORT)
-                        .show()
-                    mode.finish()
-                    true
-                }
-                R.id.option_2 -> {
-                    Toast.makeText(context, "Shared", Toast.LENGTH_SHORT)
-                        .show()
+//                    Toast.makeText(context, "Deleted", Toast.LENGTH_SHORT)
+//                        .show()
+                    val snackBarMessage = if(count==0){
+                        "$count note deleted"
+                    }else{
+                        "$count notes deleted"
+                    }
+                    Snackbar.make(binding.noteRv.notesRecyclerView,snackBarMessage,Snackbar.LENGTH_SHORT).show()
                     mode.finish()
                     true
                 }
