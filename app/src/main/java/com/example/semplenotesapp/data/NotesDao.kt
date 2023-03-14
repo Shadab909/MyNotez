@@ -2,7 +2,7 @@ package com.example.semplenotesapp.data
 
 import androidx.lifecycle.LiveData
 import androidx.room.*
-import androidx.room.OnConflictStrategy.IGNORE
+import androidx.room.OnConflictStrategy.Companion.IGNORE
 
 @Dao
 interface NotesDao {

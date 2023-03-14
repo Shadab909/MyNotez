@@ -7,7 +7,7 @@ import com.example.semplenotesapp.data.NoteRepository
 
 class NoteListViewModelFactory(private val noteRepository: NoteRepository):ViewModelProvider.Factory {
     @Suppress("unchecked_cast")
-    override fun <T : ViewModel?> create(modelClass: Class<T>): T {
+    override fun <T : ViewModel> create(modelClass: Class<T>): T {
         if (modelClass.isAssignableFrom(NoteListViewModel::class.java)) {
             return NoteListViewModel(noteRepository) as T
         }

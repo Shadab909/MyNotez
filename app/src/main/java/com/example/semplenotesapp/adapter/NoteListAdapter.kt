@@ -1,9 +1,13 @@
 package com.example.semplenotesapp.adapter
 
+import android.content.res.Resources
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.core.content.ContextCompat
+import androidx.core.content.res.ResourcesCompat.ThemeCompat
 import androidx.recyclerview.widget.RecyclerView
+import com.example.semplenotesapp.R
 import com.example.semplenotesapp.data.Note
 import com.example.semplenotesapp.databinding.NoteItemLayoutBinding
 import com.example.semplenotesapp.util.TimesAgo
@@ -14,10 +18,10 @@ class NoteListAdapter(private val clickListener: NoteListAdapter.ItemClickListen
     private var items = ArrayList<Note>()
 
     class MyViewHolder(private val binding : NoteItemLayoutBinding) : RecyclerView.ViewHolder(binding.root) {
+        val card = binding.noteCard
         val title = binding.noteItemTitle
         val content = binding.noteItemContent
         val date = binding.noteItemDate
-        val check = binding.check
     }
 
     interface ItemClickListener {
@@ -40,9 +44,9 @@ class NoteListAdapter(private val clickListener: NoteListAdapter.ItemClickListen
             clickListener.onClick(item,position)
         }
         if (isSelected(position)){
-            holder.check.visibility = View.VISIBLE
+            holder.card.strokeColor = ContextCompat.getColor(holder.card.context,R.color.orange)
         }else{
-            holder.check.visibility = View.GONE
+            holder.card.strokeColor = ContextCompat.getColor(holder.card.context,R.color.transparent)
         }
         holder.itemView.setOnLongClickListener {
             return@setOnLongClickListener clickListener.onLongClick(item,position)
