@@ -15,7 +15,7 @@ Notes App built using Room Database and MVVM architecture and it has following f
 <br>
 <br>
 <p float="left">
-<img src="https://res.cloudinary.com/dxohkfifk/image/upload/v1678824575/04_s7ksr8.jpg" width="200" style="max-width:100%;"> &nbsp;&nbsp;  
+<img src="https://res.cloudinary.com/dxohkfifk/image/upload/v1678825810/Screenshot_2023-03-15-01-59-22-240_com.example.semplenotesapp_1_x7otl5.jpg" width="200" style="max-width:100%;"> &nbsp;&nbsp;  
 <img src="https://res.cloudinary.com/dxohkfifk/image/upload/v1678824586/05_jdsojp.jpg" width="200" style="max-width:100%;"> &nbsp;&nbsp;  
 <img src="https://res.cloudinary.com/dxohkfifk/image/upload/v1678824594/06_ejz7x8.jpg" width="200" style="max-width:100%;">
 </p>
